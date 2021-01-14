@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     flexDirection: "column",
   },
-  titleBox: {
-    backgroundColor: "#BD7F80",
-  },
+  // titleBox: {
+  //   backgroundColor: "#BD7F80",
+  // },
   villaName: {
     fontSize: 18,
     textAlign: "center",
@@ -129,7 +129,7 @@ const App = () => (
             src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"
           />
           <View style={styles.mainContainer}>
-            <View style={styles.titleBox}>
+            <View style={{ backgroundColor: "#BD7F80" }}>
               <Text style={styles.villaName}>VILLA CASA</Text>
               <Text style={styles.villaLocation}>Calla Longa</Text>
               <Text style={styles.villaPrice}>Price 10m€</Text>
