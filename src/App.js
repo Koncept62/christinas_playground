@@ -73,16 +73,39 @@ const SecondaryImage = styled(Image)`
   height: 100%;
 `;
 
-const IconsContainer = styled(Box)`
+const HighlightsContainer = styled(Box)`
   background-color: white;
-  opacity: 0.5;
+  /* opacity: 0.5; */
   margin-top: 8px;
+  padding: 8px 8px;
 `;
 
 const FeaturesInsideContainer = styled(Box)`
   border-top: 1px solid #bd7f80;
 `;
 
+const StraplineContainer = styled(Box)`
+  position: relative;
+  top: -50;
+  height: 50;
+  background-color: white;
+  opacity: 0.5;
+`;
+
+const ContentContainer = styled(Box)`
+  position: relative;
+  top: -50;
+`;
+
+const FooterContainer = styled(Box)`
+  position: relative;
+  top: -50;
+`;
+
+const ContactContainer = styled(Box)`
+  position: relative;
+  top: -50;
+`;
 const TextBlock = ({ children, style, align, stretch, size, color }) => {
   let fontSize = "12pt";
 
@@ -138,13 +161,29 @@ const Button = ({
 );
 
 const Feature = ({ icon, title }) => (
-  <Box direction="row">
+  <Box direction="row" height="18px">
     {icon ? (
-      <Image src={icon} style={{ width: "32px", height: "32px" }} />
+      <Image src={icon} style={{ objectFit: "contain", marginRight: "8px" }} />
     ) : (
       <React.Fragment />
     )}
-    <TextBlock>{title}</TextBlock>
+    <TextBlock style={{ alignSelf: "center" }}>{title}</TextBlock>
+  </Box>
+);
+
+const Highlight = ({ icon, title }) => (
+  <Box width="33%">
+    <Image
+      src={icon}
+      style={{
+        objectFit: "contain",
+        paddingHorizontal: "12px",
+        paddingVertical: "4px",
+      }}
+    />
+    <TextBlock color="#BD7F80" size="small" style={{ alignSelf: "center" }}>
+      {title}
+    </TextBlock>
   </Box>
 );
 
@@ -162,9 +201,15 @@ const property = {
 
   description:
     "Duis qui laboris id aliqua velit. Magna aliqua id do cupidatat eiusmod dolor aute minim esse. Excepteur in sit fugiat occaecat est sit proident sit do et culpa anim.",
-  features: [{ icon: "", title: "Swimming Pool" }],
+  features: [{ icon: "/img/icons/bathrooms.png", title: "Swimming Pool" }],
   contactEmail: "mat@villasofibiza.com",
   contactPhone: "+34 1234567",
+  bedrooms: 6,
+  bathrooms: 3,
+  buildSize: 900,
+  plotSize: 1800,
+  touristLicense: true,
+  headline: "Charming property in the North of Ibiza",
 };
 
 const PDF = ({
@@ -176,6 +221,12 @@ const PDF = ({
   images,
   contactEmail,
   contactPhone,
+  bedrooms,
+  bathrooms,
+  buildSize,
+  plotSize,
+  touristLicense,
+  headline,
 }) => (
   <Document>
     <Page size="A4">
@@ -183,7 +234,7 @@ const PDF = ({
 
       <PageContainer height="100%" width="100%">
         <LogoContainer>
-          <Image src="/logo.png" />
+          <Image src="/img/logo.png" />
         </LogoContainer>
         <Box key="header-row" width="100%" height="40%">
           <RightContainer width="180px">
@@ -202,19 +253,49 @@ const PDF = ({
                 €{numeral(listPrice).format("0,0")}
               </TextBlock>
             </Box>
-            <IconsContainer>
-              <TextBlock color="black">White</TextBlock>
-            </IconsContainer>
+            <HighlightsContainer
+              direction="row"
+              wrap
+              justify="center"
+              align="center"
+            >
+              <Highlight title={bedrooms} icon="/img/icons/bedrooms.png" />
+              <Highlight title={bathrooms} icon="/img/icons/bathrooms.png" />
+              <Highlight
+                title={`${buildSize}m2`}
+                icon="/img/icons/bedrooms.png"
+              />
+              <Highlight
+                title={`${plotSize}m2`}
+                icon="/img/icons/bedrooms.png"
+              />
+              <Highlight
+                title={touristLicense ? "Yes" : "No"}
+                icon="/img/icons/bedrooms.png"
+              />
+            </HighlightsContainer>
+            <Button
+              to="https://villasofibiza.com"
+              width="100%"
+              style={{ marginTop: "8px" }}
+              backgroundColor="#2A3D50"
+              textColor="white"
+            >
+              VIEW GALLARY
+            </Button>
           </RightContainer>
         </Box>
-        <Box key="content-row" direction="row" width="100%" height="50%">
+        <StraplineContainer justify="center" align="center">
+          <TextBlock size="large">{headline}</TextBlock>
+        </StraplineContainer>
+        <ContentContainer direction="row" width="100%" height="50%">
           <Box width="50%" height="100%">
             <DescriptionContainer
               width="100%"
               height="50%"
               backgroundColor="white"
             >
-              <TextBlock>{description}</TextBlock>
+              <TextBlock size="small">{description}</TextBlock>
             </DescriptionContainer>
             <FeaturesContainer width="100%" height="50%" padding="12px">
               <FeaturesInsideContainer>
@@ -239,9 +320,8 @@ const PDF = ({
               <SecondaryImage src={images[1]} />
             </Box>
           </Box>
-        </Box>
-        <Box
-          key="contact-row"
+        </ContentContainer>
+        <ContactContainer
           direction="row"
           height="7%"
           backgroundColor="#BD7F80"
@@ -259,25 +339,22 @@ const PDF = ({
             backgroundColor="#2A3D50"
             textColor="white"
           >
-            Register Interest
+            REGISTER INTEREST
           </Button>
-        </Box>
-        <Box
-          key="footer-row"
+        </ContactContainer>
+        <FooterContainer
           height="3%"
           backgroundColor="#2A3D50"
           align="center"
           justify="center"
         >
-          <TextBlock color="#CDAB31">
-            <Link
-              src="https://villasofibiza.com"
-              style={{ textDecoration: "none" }}
-            >
-              villasofibiza.com
-            </Link>
-          </TextBlock>
-        </Box>
+          <Link
+            src="https://villasofibiza.com"
+            style={{ textDecoration: "none" }}
+          >
+            <TextBlock color="#CDAB31">villasofibiza.com</TextBlock>
+          </Link>
+        </FooterContainer>
       </PageContainer>
     </Page>
   </Document>
