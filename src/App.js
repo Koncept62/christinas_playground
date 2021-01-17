@@ -8,338 +8,287 @@ import {
   Image,
   PDFViewer,
   Font,
+  Link,
 } from "@react-pdf/renderer";
 
-const styles = StyleSheet.create({
-  body: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingHorizontal: 0,
-    fontFamily: "LibreBaskerville",
-  },
-  title: {
-    fontSize: 24,
-    textAlign: "center",
-    fontFamily: "LibreBaskerville",
-  },
-  topContainer: {
-    width: "100%",
-    height: "40%",
-    alignSelf: "flex-end",
-    flexDirection: "column",
-    backgroundColor:"#dedede",
-  },
-  mainContainer: {
-    width: "180",
-    height: "100",
-    marginTop: 40,
-    alignSelf: "flex-end",
-    flexDirection: "column",
-  },
+import styled from "@react-pdf/styled-components";
 
-  firstRowContainer: {
-    width: "100%",
-    height: "24%",
-    minHeight: "23%",
-    marginTop: "4",
-    flexDirection: "row",
-  },
+import numeral from "numeral";
 
-  secondRowContainer: {
-    width: "100%",
-    height: "24%",
-    minHeight: "23%",
-    marginTop: "4",
-    flexDirection: "row",
-  },
-
-  contactBoxContainer: {
-    width: "100%",
-    height: "7%",
-    marginTop: "2",
-    flexDirection: "row",
-    backgroundColor: "#BD7F80",
-  },
-
-  webContainer: {
-    width: "100%",
-    height: "4%",
-    minHeight: "4%",
-    marginTop: "1",
-    flexDirection: "column",
-    backgroundColor: "#273342",
-  },
-  // titleBox: {
-  //   backgroundColor: "#BD7F80",
-  // },
-  villaName: {
-    fontSize: 18,
-    textAlign: "center",
-    // marginBottom: 5,
-    color: "white",
-    letterSpacing: 3,
-  },
-  villaPrice: {
-    fontSize: 18,
-    textAlign: "center",
-    // marginBottom: 5,
-    color: "white",
-    letterSpacing: 3,
-  },
-  villaLocation: {
-    fontSize: 14,
-    textAlign: "center",
-    // marginBottom: 0,
-    color: "2A3D50",
-    letterSpacing: 1,
-    fontFamily: "Times-Roman",
-  },
-  villaNameBox: {
-    // backgroundColor: "#BD7F80",
-    // height: "100",
-    // width: "180",
-    // paddingTop: 10,
-    // marginBottom: 5,
-    // marginTop: 40,
-    // alignSelf: "flex-end",
-  },
-  villaFeaturesBox: {
-    backgroundColor: "white",
-    marginTop: "4",
-    opacity: "0.66",
-    // height: "150",
-    flexDirection:"column",
-    padding: 10,
-    // marginBottom: 5,
-  },
-  villaButton: {
-    backgroundColor: "#273342",
-    height: "40",
-    width: "180",
-    justifyContent: "center",
-    marginTop: "4",
-    // paddingTop: 10,
-    // marginBottom: 5,
-  },
-  villaButtonText: {
-    fontSize: 10,
-    textAlign: "center",
-    color: "white",
-    letterSpacing: 4,
-  },
-  villaStrap: {
-    fontSize: 15,
-    textAlign: "center",
-    // marginTop: 5,
-    color: "black",
-    letterSpacing: 1,
-    fontFamily: "Times-Roman",
-  },
-  firstCollumn: {
-    width: "49%",
-    minWidth: "49%",
-    height: "100%",
-    marginRight: "4",
-    marginLeft: "4",
-    padding: 20,
-    flexDirection: "row",
-    borderBottomColor: "#BD7F80",
-    borderBottomStyle: "solid",
-    borderBottomWidth :2,
-  },
-
-  firstCollumnBottom: {
-    width: "49%",
-    minWidth: "46%",
-    height: "100%",
-    marginRight: "4",
-    marginLeft: "4",
-    padding: 20,
-    flexDirection: "column",
-    borderBottomWidth :0,
-  },
-  secondCollumn: {
-    width: "50%",
-    minWidth: "49%",
-    height: "100%",
-    marginRight: "0",
-    marginLeft: "4",
-    flexDirection: "row",
-  },
-
-  contactText: {
-    marginLeft: "30",
-    marginTop:"15",
-    marginRight: "30",
-    color:"white",
-  },
-
-  registerButton: {
-    backgroundColor: "#273342",
-    height: "40",
-    width: "180",
-    justifyContent: "center",
-    marginTop: "10",
-    marginLeft:"40",
-    // paddingTop: 10,
-    // marginBottom: 5,
-  },
-  webText: {
-    marginLeft: "30",
-    marginTop:"5",
-    marginRight: "30",
-    fontSize: "10",
-    color:"#CDAB31",
-    textAlign: "center",
-  },
-
-  subtitle: {
-    fontSize: 18,
-    // margin: 12,
-    fontFamily: "Oswald",
-  },
-  text: {
-    // margin: 12,
-    fontSize: 14,
-    textAlign: "justify",
-    fontFamily: "Times-Roman",
-  },
-  // image: {
-   //  position: "absolute",
-    // minWidth: "100%",
-    // minHeight: "46%",
-    // display: "block",
-    // height: "46%",
-    // width: "100%",
-  // },
-});
-
+// get the ttf url at https://nikoskip.me/gfonts.php for http://fonts.googleapis.com/css?family=
 Font.register({
   family: "LibreBaskerville",
-  src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf",
+  src:
+    "http://fonts.gstatic.com/s/librebaskerville/v9/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNZaxYaC82U.ttf",
 });
 
-const App = () => (
-  <div style={{ height: "100vh", width: "100vw" }}>
-    <PDFViewer style={{ width: "100%", height: "100%" }}>
-      <Document>
-        <Page size="A4" style={styles.body}>
-          
-          <View style={styles.topContainer}>
-            
-            <View style={styles.mainContainer}>
-              <View style={{ backgroundColor: "#BD7F80" }}>
-                <Text style={styles.villaName}>VILLA CASA</Text>
-                <Text style={styles.villaLocation}>Calla Longa</Text>
-                <Text style={styles.villaPrice}>Price 10m€</Text>
-              </View>
-              <View style={styles.villaFeaturesBox}>
-                <View style={{ height:"49%", flexDirection:"row",padding: 0,}}>
-                  <View style={{ width:"30%", margin: "5", alignContent: "space-around",}}>
-                  <Image style={{ maxWidth: "40%",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-                  <Text style={{ fontSize:"11", textAlign: "center", lineHeight:2, marginTop:"3"}}>6</Text>
-                  </View>
-                  <View style={{ width:"30%", margin: "5", alignContent: "space-around",}}>
-                  <Image style={{ maxWidth: "40%",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-                  <Text style={{ fontSize:"11", textAlign: "center", lineHeight:2, marginTop:"3"}}>6</Text>
-                  </View>
-                  <View style={{ width:"30%", margin: "5", alignContent: "space-around",}}>
-                  <Image style={{ maxWidth: "40%",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-                  <Text style={{ fontSize:"11", textAlign: "center", lineHeight:2, marginTop:"3"}}>6</Text>
-                  </View>
-                </View>
-                <View style={{ height:"49%", flexDirection:"row",alignContent: "space-around",}}>
-                <View style={{ width:"49%", margin: "5", alignContent: "space-around",}}>
-                  <Image style={{ maxWidth: "40%", }} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-                  <Text style={{ fontSize:"11", textAlign: "center", lineHeight:2, marginTop:"3"}}>6</Text>
-                  </View>
-                  <View style={{ width:"49%", margin: "5", alignContent: "center"}}>
-                  <Image style={{ maxWidth: "40%", }} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-                  <Text style={{ fontSize:"11", textAlign: "center", lineHeight:2, marginTop:"3"}}>6</Text>
-                  </View>
-                  
-                </View>
-              </View>
-              <View style={styles.villaButton}>
-                <Text style={styles.villaButtonText}>VIEW GALLERY</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.firstRowContainer}>
-            <View style={styles.firstCollumn}>
-            <Text style={{ fontSize:"11", lineHeight:1.7,}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. read more...</Text>
-            </View>
-            <View style={styles.secondCollumn}>
-            <View style={{ height:"49%"}}>
-              <View style={{width:"49%", marginRight:1}}>
-                  <Image style={styles.image}src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"
-          />
-              </View>
-              <View style={{width:"49%"}}>
-                  <Image style={styles.image}src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"
-          />
-              </View>
-              </View>
-            <View style={{ height:"49%"}}>
-                <View style={{ maxWidth:"49%",}}>
-                  <Image style={styles.image} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"
-          />
-                </View>
-                <View style={{ width:"49%",}}>
-                  <Image style={styles.image} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"
-          />
-                </View>
-            </View>
-              
-            </View>
-          </View>
-          <View style={styles.secondRowContainer}>
-          <View style={styles.firstCollumnBottom}>
-            <Text style={{ fontSize:"14", lineHeight:1.7, color:"#BD7F80"}}>Features</Text>
-            <View style={{ flexDirection: "row", marginTop: "10",}}>
-              <Image style={{ maxWidth: "10%", marginRight: "10", marginBottom:"8",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-              <Text style={{ fontSize:"12", lineHeight:2, marginTop:"5"}}>SWIMMING POOL</Text>
-            </View>
-            <View style={{ flexDirection: "row",}}>
-              <Image style={{ maxWidth: "10%", marginRight: "10", marginBottom:"´8",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-              <Text style={{ fontSize:"12", lineHeight:2, marginTop:"5"}}>SWIMMING POOL</Text>
-            </View>
-            <View style={{ flexDirection: "row",}}>
-              <Image style={{ maxWidth: "10%", marginRight: "10", marginBottom:"8",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-              <Text style={{ fontSize:"12", lineHeight:2, marginTop:"5"}}>SWIMMING POOL</Text>
-            </View>
-            <View style={{ flexDirection: "row",}}>
-              <Image style={{ maxWidth: "10%", marginRight: "10", marginBottom:"´8",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-              <Text style={{ fontSize:"12", lineHeight:2, marginTop:"5"}}>SWIMMING POOL</Text>
-            </View>
-            <View style={{ flexDirection: "row",}}>
-              <Image style={{ maxWidth: "10%", marginRight: "10", marginBottom:"8",}} src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"/>
-              <Text style={{ fontSize:"12", lineHeight:2, marginTop:"5"}}>SWIMMING POOL</Text>
-            </View>
-           </View>
-              <View style={styles.secondCollumn}>
-              <Image
-            style={styles.image}
-            src="https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg"
-          />
-              </View>
-          </View>
-          <View style={styles.contactBoxContainer}>
-            <Text style={styles.contactText}>mathew@villasofibiza.com - +34 680 66 14 72</Text>
-            <View style={styles.registerButton}>
-                <Text style={styles.villaButtonText}>REGISTER INTEREST</Text>
-            </View>
-          </View>
-          <View style={styles.webContainer}>
-            <Text style={styles.webText}>www.villasofibiza.com</Text>
-          </View>
-          {/* <Text style={styles.villaStrap}>
-            Here goes the awesome one line text about the property
-          </Text> */}
-        </Page>
-      </Document>
-    </PDFViewer>
-  </div>
+const Box = styled(View)`
+  display: flex;
+  flex-direction: ${(props) => (props.direction ? props.direction : "column")};
+  width: ${(props) => (props.width ? props.width : "auto")};
+  height: ${(props) => (props.height ? props.height : "auto")};
+  background-color: ${(props) => props.backgroundColor};
+  flex-wrap: ${(props) => (props.wrap ? "wrap" : "nowrap")};
+  padding: ${(props) => (props.padding ? props.padding : "0px")};
+  margin: ${(props) => (props.margin ? props.margin : "0px")};
+  justify-content: ${(props) => (props.justify ? props.justify : "flex-start")};
+  align-items: ${(props) => (props.align ? props.align : "stretch")};
+  /* border: ${(props) => props.border}; */
+`;
+
+const PageContainer = styled(Box)`
+  position: absolute;
+  font-family: LibreBaskerville;
+  font-size: 12px;
+`;
+
+const LogoContainer = styled(Box)`
+  position: absolute;
+  top: 20;
+  left: 20;
+  width: 64px;
+  height: 64px;
+`;
+
+const RightContainer = styled(Box)`
+  position: absolute;
+  margin-top: 40;
+  align-self: flex-end;
+  color: white;
+`;
+
+const DescriptionContainer = styled(Box)`
+  padding: 12px;
+`;
+
+const FeaturesContainer = styled(Box)``;
+
+const GalleryImage = styled(Image)`
+  width: 50%;
+  height: 50%;
+`;
+
+const SecondaryImage = styled(Image)`
+  width: 100%;
+  height: 100%;
+`;
+
+const IconsContainer = styled(Box)`
+  background-color: white;
+  opacity: 0.5;
+  margin-top: 8px;
+`;
+
+const FeaturesInsideContainer = styled(Box)`
+  border-top: 1px solid #bd7f80;
+`;
+
+const TextBlock = ({ children, style, align, stretch, size, color }) => {
+  let fontSize = "12pt";
+
+  switch (size) {
+    case "small":
+      fontSize = "10pt";
+      break;
+    case "large":
+      fontSize = "14pt";
+      break;
+    case "xlarge":
+      fontSize = "24pt";
+      break;
+    default:
+      fontSize = "12pt";
+      break;
+  }
+
+  const s = {
+    ...(color && { color }), // optionally add color
+    textAlign: align ? align : "left",
+    fontStretch: stretch ? stretch : "normal",
+    fontSize,
+    ...style,
+  };
+
+  return <Text style={s}>{children}</Text>;
+};
+
+const Button = ({
+  children,
+  to,
+  width,
+  height,
+  backgroundColor,
+  textColor,
+  style,
+}) => (
+  <Box
+    width={width}
+    height={height}
+    backgroundColor={backgroundColor}
+    style={{ ...style, padding: "8px 8px" }}
+    align="center"
+    justify="center"
+  >
+    <TextBlock color={textColor}>
+      <Link src={to} style={{ textDecoration: "none" }}>
+        {children}
+      </Link>
+    </TextBlock>
+  </Box>
 );
 
-export default App;
+const Feature = ({ icon, title }) => (
+  <Box direction="row">
+    {icon ? (
+      <Image src={icon} style={{ width: "32px", height: "32px" }} />
+    ) : (
+      <React.Fragment />
+    )}
+    <TextBlock>{title}</TextBlock>
+  </Box>
+);
+
+const property = {
+  name: "Villa Casa",
+  location: "Calla Llonga",
+  listPrice: 1000000,
+  images: [
+    "https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg",
+    "https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg",
+    "https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg",
+    "https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg",
+    "https://i1.wp.com/www.inveniohomes.com/wp-content/uploads/2021/01/the-grey_190927_061_5000px-scaled.jpg",
+  ],
+
+  description:
+    "Duis qui laboris id aliqua velit. Magna aliqua id do cupidatat eiusmod dolor aute minim esse. Excepteur in sit fugiat occaecat est sit proident sit do et culpa anim.",
+  features: [{ icon: "", title: "Swimming Pool" }],
+  contactEmail: "mat@villasofibiza.com",
+  contactPhone: "+34 1234567",
+};
+
+const PDF = ({
+  name,
+  location,
+  listPrice,
+  description,
+  features,
+  images,
+  contactEmail,
+  contactPhone,
+}) => (
+  <Document>
+    <Page size="A4">
+      <Image src={images[0]} />
+
+      <PageContainer height="100%" width="100%">
+        <LogoContainer>
+          <Image src="/logo.png" />
+        </LogoContainer>
+        <Box key="header-row" width="100%" height="40%">
+          <RightContainer width="180px">
+            <Box backgroundColor="#BD7F80" padding="8px">
+              <TextBlock
+                size="xlarge"
+                align="center"
+                style={{ marginBottom: "8px" }}
+              >
+                {name}
+              </TextBlock>
+              <TextBlock align="center" style={{ marginBottom: "8px" }}>
+                {location}
+              </TextBlock>
+              <TextBlock align="center" size="large">
+                €{numeral(listPrice).format("0,0")}
+              </TextBlock>
+            </Box>
+            <IconsContainer>
+              <TextBlock color="black">White</TextBlock>
+            </IconsContainer>
+          </RightContainer>
+        </Box>
+        <Box key="content-row" direction="row" width="100%" height="50%">
+          <Box width="50%" height="100%">
+            <DescriptionContainer
+              width="100%"
+              height="50%"
+              backgroundColor="white"
+            >
+              <TextBlock>{description}</TextBlock>
+            </DescriptionContainer>
+            <FeaturesContainer width="100%" height="50%" padding="12px">
+              <FeaturesInsideContainer>
+                <TextBlock style={{ color: "#BD7F80", marginBottom: "12px" }}>
+                  Features
+                </TextBlock>
+              </FeaturesInsideContainer>
+              <Box>
+                {features.map((props) => (
+                  <Feature {...props} />
+                ))}
+              </Box>
+            </FeaturesContainer>
+          </Box>
+          <Box width="50%" height="100%">
+            <Box height="50%" backgroundColor="purple" direction="row" wrap>
+              {images.slice(0, 4).map((src) => (
+                <GalleryImage src={src} />
+              ))}
+            </Box>
+            <Box height="50%" backgroundColor="blue">
+              <SecondaryImage src={images[1]} />
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          key="contact-row"
+          direction="row"
+          height="7%"
+          backgroundColor="#BD7F80"
+          align="center"
+          padding="2px 24px"
+          justify="space-between"
+        >
+          <TextBlock color="white" size="large">
+            {contactEmail} - {contactPhone}
+          </TextBlock>
+          <Button
+            to="https://villasofibiza.com"
+            width="200px"
+            style={{ marginTop: "3px", marginBottom: "3px" }}
+            backgroundColor="#2A3D50"
+            textColor="white"
+          >
+            Register Interest
+          </Button>
+        </Box>
+        <Box
+          key="footer-row"
+          height="3%"
+          backgroundColor="#2A3D50"
+          align="center"
+          justify="center"
+        >
+          <TextBlock color="#CDAB31">
+            <Link
+              src="https://villasofibiza.com"
+              style={{ textDecoration: "none" }}
+            >
+              villasofibiza.com
+            </Link>
+          </TextBlock>
+        </Box>
+      </PageContainer>
+    </Page>
+  </Document>
+);
+
+export default function App() {
+  return (
+    <div style={{ height: "100vh", width: "100vw" }}>
+      <PDFViewer style={{ width: "100%", height: "100%" }}>
+        <PDF {...property} />
+      </PDFViewer>
+    </div>
+  );
+}
